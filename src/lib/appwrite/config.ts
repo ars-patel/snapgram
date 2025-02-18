@@ -12,7 +12,12 @@ export const appwriteConfig = {
 
 export const client = new Client();
 
-client.setEndpoint(appwriteConfig.url);
+if (appwriteConfig.url && typeof appwriteConfig.url === 'string') {
+  client.setEndpoint(appwriteConfig.url);
+} else {
+  console.error("Appwrite URL is undefined or invalid:", appwriteConfig.url);
+}
+
 client.setProject(appwriteConfig.projectId);
 
 export const account = new Account(client);
